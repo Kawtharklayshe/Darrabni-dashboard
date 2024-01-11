@@ -1,11 +1,15 @@
 <script setup>
 import AppSelect from '@/@core/components/app-form-elements/AppSelect.vue'
+import { ref } from 'vue'
 
 const firstName = ref('')
 const middleName = ref('')
 const lastName = ref('')
+const trainerId = ref('sp21')
+const birthDate = ref('')
 const email = ref('')
-const specialization = ref('')
+const phoneNumber = ref('09')
+const training = ref('')
 const startDate = ref('')
 const salaryStartDate = ref('')
 const salary = ref('')
@@ -14,8 +18,41 @@ const sessionTotalHours = ref('')
 const sessionTime = ref('')
 const checkbox = ref(false)
 
-const items = ['السبت ', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة']
-const selected = ref([])
+const specializationSelected = ref([])
+const specialization = ref(['مهندس معلوماتية ', 'مهندس اتصالات'])
+const sessionDaysSelected = ref([])
+const sessionDays = ref(['السبت ', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'])
+const pathSelected = ref([])
+const path = ref(['Front End', 'Back End', 'Mopile Application'])
+const branchSelected = ref([])
+const branch = ref(['ايميسا', 'التربية', 'online'])
+
+const idErrorMsg = ref(false)
+const phoneErrorMsg = ref(false)
+
+const onIdChange = e => {
+  const regex = /^sp21\d{4}$/
+
+  if (!e.target.value.match(regex)) {
+    idErrorMsg.value = true
+  } else {
+    idErrorMsg.value = false
+
+    trainerId.value =  e.target.value    
+  }
+}
+
+const onPhoneNumberChange = e => {
+  const regex = /^09\d{8}$/
+
+  if (!e.target.value.match(regex)) {
+    phoneErrorMsg.value = true
+  } else {
+    phoneErrorMsg.value = false
+
+    phoneNumber.value =  e.target.value    
+  }
+}
 </script>
 
 <template>
@@ -54,10 +91,40 @@ const selected = ref([])
         />
       </VCol>
 
+      <!-- 👉 Trainer Id -->
+      <VCol
+        cols="12"
+        md="6"
+      >
+        <AppTextField
+          v-model="trainerId"
+          label="معرف المدرب"
+          @change="onIdChange"
+        />
+        <p
+          v-if="idErrorMsg"
+          class="mt-2 red--text"
+        >
+          Please enter sp21, followed by four digits
+        </p>
+      </VCol>
+
+      
+      <!-- 👉 Birth Date -->
+      <VCol
+        cols="12"
+        md="6"
+      >
+        <AppDateTimePicker
+          v-model="birthDate"
+          label="تاريخ الميلاد "
+        />
+      </VCol>
+
       <!-- 👉 Email -->
       <VCol
         cols="12"
-        md="12"
+        md="6"
       >
         <AppTextField
           v-model="email"
@@ -65,21 +132,76 @@ const selected = ref([])
         />
       </VCol>
 
+      <!-- 👉 Phone Number -->
+      <VCol  
+        cols="12"
+        md="6"
+      >
+        <AppTextField
+          v-model="phoneNumber"
+          label="رقم الهاتف"
+          @change="onPhoneNumberChange"
+        />
+        <p
+          v-if="phoneErrorMsg"
+          class="mt-2 red--text"
+        >
+          -- --- ---Please enter this pattern 09
+        </p>
+      </VCol>
+
+
       <!-- 👉 Specialization -->
       <VCol
         cols="12"
         md="6"
       >
-        <AppTextField
-          v-model="specialization"
+        <AppSelect
+          v-model="specializationSelected"
+          v-col
+          :items="specialization"
           label="الاختصاص"
+        />
+      </VCol>
+
+      <VCol
+        cols="12"
+        md="6"
+      >
+        <AppSelect
+          v-model="pathSelected"
+          v-col
+          :items="path"
+          label="المسار"
+        />
+      </VCol>
+
+      <VCol
+        cols="12"
+        md="6"
+      >
+        <AppTextField
+          v-model="training"
+          label="الدفعة التدريبية"
+        />
+      </VCol>
+
+      <VCol
+        cols="12"
+        md="6"
+      >
+        <AppSelect
+          v-model="branchSelected"
+          v-col
+          :items="branch"
+          label="الفرع"
         />
       </VCol>
 
       <!-- 👉 Start Date -->
       <VCol
         cols="12"
-        md="6"
+        md="4"
       >
         <AppDateTimePicker
           v-model="startDate"
@@ -90,7 +212,7 @@ const selected = ref([])
       <!-- 👉 Salary -->
       <VCol
         cols="12"
-        md="6"
+        md="4"
       >
         <AppTextField
           v-model="salary"
@@ -102,13 +224,13 @@ const selected = ref([])
       <!-- 👉 Salary Start Date -->
       <VCol
         cols="12"
-        md="6"
+        md="4"
       >
         <AppDateTimePicker
           v-model="salaryStartDate"
           label="تاريخ أول راتب"
         />
-      </VCol>
+      </VCol> 
 
       <VDivider class="my-5" />
 
@@ -142,9 +264,9 @@ const selected = ref([])
         md="6"
       >
         <AppSelect
-          v-model="selected"
+          v-model="sessionDaysSelected"
           v-col
-          :items="items"
+          :items="sessionDays"
           label="ايام الجلسات"
           chips
 

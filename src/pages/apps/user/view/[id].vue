@@ -49,6 +49,7 @@ userListStore.fetchUser(Number(route.params.id)).then(response => {
     >
       <UserBioPanel :user-data="userData" />
     </VCol>
+    
 
     <VCol
       cols="12"
