@@ -39,6 +39,10 @@ const { appRouteTransition } = useThemeConfig()
       <NavbarThemeSwitcher class="me-1" />
       <NavbarShortcuts class="me-1" />
       <NavBarNotifications class="me-2" />
+<<<<<<< HEAD
+=======
+      
+>>>>>>> 7962093 (Yhea-Team)
       <UserProfile />
     </template>
 

@@ -22,7 +22,11 @@ const label = computed(() => useAttrs().label)
     <VLabel
       v-if="label"
       :for="elementId"
+<<<<<<< HEAD
       class="mb-1 text-body-5 text-high-emphasis"
+=======
+      class="mb-1 text-body-2 text-high-emphasis"
+>>>>>>> 7962093 (Yhea-Team)
       :text="label"
     />
     <VSelect

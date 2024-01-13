@@ -1,6 +1,9 @@
 export default [
   { heading: 'Apps & Pages' },
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7962093 (Yhea-Team)
   // {
   //   title: 'Email',
   //   icon: { icon: 'tabler-mail' },
@@ -26,6 +29,7 @@ export default [
   //     { title: 'Add', to: 'apps-invoice-add' },
   //   ],
   // },
+<<<<<<< HEAD
   // {
   //   title: 'User',
   //   icon: { icon: 'tabler-users' },
@@ -34,14 +38,29 @@ export default [
   //     { title: 'View', to: { name: 'apps-user-view-id', params: { id: 21 } } },
   //   ],
   // },
+=======
+>>>>>>> 7962093 (Yhea-Team)
   {
     title: 'المدربين',
     icon: { icon: 'tabler-users' },
     children: [
+<<<<<<< HEAD
       { title: 'اضافة', to: { name: 'apps-trainer-add' } },
     ],
   },
 
+=======
+      { title: 'List', to: 'apps-user-list' },
+      { title: 'View', to: { name: 'apps-user-view-id', params: { id: 21 } } },
+    ],
+  },
+
+  {
+    title: 'الدفعات',
+    icon: { icon: 'tabler-currency-dollar' },
+    to: 'apps-payments',
+  },
+>>>>>>> 7962093 (Yhea-Team)
   // {
   //   title: 'Roles & Permissions',
   //   icon: { icon: 'tabler-settings' },
