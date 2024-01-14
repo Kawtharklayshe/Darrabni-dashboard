@@ -15,26 +15,6 @@ const userTab = ref(null)
 const tabs = [
   {
     icon: 'tabler-user-check',
-<<<<<<< HEAD
-    title: 'Account',
-  },
-  {
-    icon: 'tabler-lock',
-    title: 'Security',
-  },
-  {
-    icon: 'tabler-currency-dollar',
-    title: 'Billing & Plan',
-  },
-  {
-    icon: 'tabler-bell',
-    title: 'Notifications',
-  },
-  {
-    icon: 'tabler-link',
-    title: 'Connections',
-  },
-=======
     title: 'المعلومات الشخصية',
   },
   {
@@ -53,7 +33,6 @@ const tabs = [
   //   icon: 'tabler-link',
   //   title: 'Connections',
   // },
->>>>>>> 7962093 (Yhea-Team)
 ]
 
 userListStore.fetchUser(Number(route.params.id)).then(response => {
@@ -70,10 +49,6 @@ userListStore.fetchUser(Number(route.params.id)).then(response => {
     >
       <UserBioPanel :user-data="userData" />
     </VCol>
-<<<<<<< HEAD
-    
-=======
->>>>>>> 7962093 (Yhea-Team)
 
     <VCol
       cols="12"

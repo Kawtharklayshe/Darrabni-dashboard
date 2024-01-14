@@ -18,11 +18,7 @@
     "@vueuse/core": "10.1.0",
     "@vueuse/math": "10.1.0",
     "apexcharts-clevision": "3.28.5",
-<<<<<<< HEAD
     "axios": "^1.6.5",
-=======
-    "axios": "1.4.0",
->>>>>>> 7962093 (Yhea-Team)
     "axios-mock-adapter": "1.21.4",
     "chart.js": "4.3.0",
     "eslint-import-resolver-alias": "^1.1.2",
@@ -73,11 +69,7 @@
     "stylelint-use-logical-spec": "4.1.0",
     "unplugin-auto-import": "0.15.3",
     "unplugin-vue-components": "0.24.1",
-<<<<<<< HEAD
     "vite": "^4.5.1",
-=======
-    "vite": "4.3.3",
->>>>>>> 7962093 (Yhea-Team)
     "vite-plugin-pages": "0.29.0",
     "vite-plugin-vue-layouts": "0.8.0",
     "vite-plugin-vuetify": "1.0.2",

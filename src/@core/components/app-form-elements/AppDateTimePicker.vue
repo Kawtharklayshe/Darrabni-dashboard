@@ -117,11 +117,7 @@ const elementId = computed(() => {
     <!-- v-input -->
     <VLabel
       v-if="fieldProps.label"
-<<<<<<< HEAD
-      class="mb-1 text-body-5 text-high-emphasis"
-=======
       class="mb-1 text-body-2 text-high-emphasis"
->>>>>>> 7962093 (Yhea-Team)
       :for="elementId"
       :text="fieldProps.label"
     />
