@@ -26,20 +26,19 @@ export default [
   //     { title: 'Add', to: 'apps-invoice-add' },
   //   ],
   // },
-  // {
-  //   title: 'User',
-  //   icon: { icon: 'tabler-users' },
-  //   children: [
-  //     { title: 'List', to: 'apps-user-list' },
-  //     { title: 'View', to: { name: 'apps-user-view-id', params: { id: 21 } } },
-  //   ],
-  // },
+
   {
     title: 'المدربين',
     icon: { icon: 'tabler-users' },
     children: [
+
       { title: 'اضافة', to: { name: 'apps-trainer-add' } },
     ],
+  },
+  {
+    title: 'الدفعات',
+    icon: { icon: 'tabler-currency-dollar' },
+    to: "apps-payments",
   },
 
   // {

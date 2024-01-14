@@ -2,6 +2,9 @@
 import UseInfoTrainer from '@/views/apps/trainer/add/UseInfoTrainer.vue'
 import { useUserListStore } from '@/views/apps/user/useUserListStore'
 import UserBioPanel from '@/views/apps/user/view/UserBioPanel.vue'
+import UseTrainerSalary from '@/views/apps/trainer/add/UseTrainerSalary.vue'
+import UseTrainerCourseInfo from '@/views/apps/trainer/add/UseTrainerCourseInfo.vue'
+
 
 const userListStore = useUserListStore()
 const route = useRoute()
@@ -12,6 +15,14 @@ const tabs = [
   {
     icon: 'tabler-user-check',
     title: 'المعلومات الشخصية',
+  },
+  {
+    icon: 'tabler-currency-dollar',
+    title: 'الراتب',
+  },
+  {
+    icon: 'tabler-home-question',
+    title: 'معلومات المسار',
   },
 ]
 
@@ -101,6 +112,13 @@ const uploadNewImage=i=>{
         <VWindowItem>
           <UseInfoTrainer />
         </VWindowItem>
+        <VWindowItem>
+          <UseTrainerSalary />
+
+</VWindowItem>
+<VWindowItem>
+  <UseTrainerCourseInfo/>
+</VWindowItem>
       </VWindow>
     </VCol>
   </VRow>
