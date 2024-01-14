@@ -1,5 +1,5 @@
 <script setup>
-import TrainerInfoForm from '@/layouts/components/TrainerInfoForm.vue'
+import TrainerInfoForm from '@core/components/trainer/TrainerInfoForm.vue'
 </script>
 
 <template>

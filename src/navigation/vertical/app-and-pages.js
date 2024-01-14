@@ -1,5 +1,6 @@
 export default [
   { heading: 'Apps & Pages' },
+
   // {
   //   title: 'Email',
   //   icon: { icon: 'tabler-mail' },
@@ -26,22 +27,20 @@ export default [
   //   ],
   // },
 
-
   {
     title: 'المدربين',
     icon: { icon: 'tabler-users' },
     children: [
 
-      { title: 'List', to: 'apps-user-list' },
-      { title: 'View', to: { name: 'apps-user-view-id', params: { id: 21 } } },
+      { title: 'اضافة', to: { name: 'apps-trainer-add' } },
     ],
   },
-
   {
     title: 'الدفعات',
     icon: { icon: 'tabler-currency-dollar' },
-    to: 'apps-payments',
+    to: "apps-payments",
   },
+
   // {
   //   title: 'Roles & Permissions',
   //   icon: { icon: 'tabler-settings' },
