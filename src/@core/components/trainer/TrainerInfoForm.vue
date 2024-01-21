@@ -156,6 +156,8 @@ const onPhoneNumberChange = e => {
         cols="12"
         md="6"
       >
+    
+
         <AppSelect
           v-model="specializationSelected"
           v-col

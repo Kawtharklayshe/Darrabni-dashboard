@@ -1,5 +1,7 @@
 <script setup>
-
+import { VDataTable } from 'vuetify/labs/VDataTable'
+import { avatarText } from '@/@core/utils/formatters'
+import data from '@/views/demos/forms/tables/data-table/datatable'
 
 
 const paths = ['FrontEnd', 'BackEnd', 'Mobile Application', 'UI/UX']
@@ -7,57 +9,13 @@ const sections = ['إيميسا', " التربية"]
 const pathSelected = ref('')
 const sectionSelected = ref('')
 
-
-const salaryDetails=ref({
-  salaryInHours: "",
-  salaryDate: "",
-
-  // الحضور بالساعات
-  attendanceHours: "",
-
-  //الخصم
-  salaryDeduction: "",
-})
-
-const salaryArray=ref([
-
-])
-
-// Recent devices Headers
-const recentDeviceHeader = [
-  {
-    title: 'الراتب بالساعة',
-    key: 'salaryInHours',
-  },
-  {
-    title: 'تاريخ الراتب',
-    key: 'salaryDate',
-  },
-  {
-    title: 'عدد ساعات الحضور',
-    key: 'attendanceHours',
-  },
-  {
-    title: 'الخصم',
-    key: 'salaryDeduction',
-  },
-  {
-    title: 'الراتب المستحق',
-    key: 'total',
-  },
-]
-
-import { VDataTable } from 'vuetify/labs/VDataTable'
-import { avatarText } from '@/@core/utils/formatters'
-import data from '@/views/demos/forms/tables/data-table/datatable'
-
 const headers = [
-  { title: 'NAME', key: 'full_name' },
-  { title: 'EMAIL', key: 'email' },
-  { title: 'DATE', key: 'start_date' },
-  { title: 'SALARY', key: 'salary' },
-  { title: 'AGE', key: 'age' },
-  { title: 'STATUS', key: 'status' },
+  { title: ' الاسم', key: 'full_name' },
+  { title: 'المسار', key: 'email' },
+  { title: 'تاريخ بداية المسار', key: 'start_date' },
+  { title: 'التكلفة', key: 'salary' },
+  // { title: 'AGE', key: 'age' },
+  { title: 'مكتمل؟', key: 'status' },
 ]
 
 const resolveStatusVariant = (status) => {
@@ -66,11 +24,14 @@ const resolveStatusVariant = (status) => {
     return { color: 'success', text: 'Professional' }
   else 
     return { color: 'error', text: 'Rejected' }
- 
 }
 
-// functions
 
+// functions
+const print = (obj) => {
+  console.log(obj); 
+  console.log(obj.age + "  " + obj.email);
+}
 const saveData = () =>{
   
   salaryArray.value.push(salaryDetails.value)
@@ -120,7 +81,7 @@ const saveData = () =>{
               >
           </VCol>
             </VRow>
-            <VRow class=" mt-8">
+            <VRow class="mt-8">
               <AppTextField
               v-model="search"
               prepend-inner-icon="tabler-search"
@@ -136,7 +97,7 @@ const saveData = () =>{
               <!-- full name -->
               
               <template #item.full_name="{ item }">
-                <div class="d-flex align-center">
+                <div class="d-flex align-center" @click="print(item.raw)">
                   <VAvatar
                     size="32"
                     :color="item.raw.avatar ? '' : 'primary'"
@@ -167,6 +128,7 @@ const saveData = () =>{
                 </VChip>
               </template>
             </VDataTable>
+           
               <VCol cols="12">
                 <VBtn
                   type="submit"

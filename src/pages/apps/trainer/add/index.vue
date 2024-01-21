@@ -17,13 +17,14 @@ const tabs = [
     title: 'المعلومات الشخصية',
   },
   {
-    icon: 'tabler-currency-dollar',
-    title: 'الراتب',
-  },
-  {
     icon: 'tabler-home-question',
     title: 'معلومات المسار',
   },
+  {
+    icon: 'tabler-currency-dollar',
+    title: 'الراتب',
+  },
+ 
 ]
 
 userListStore.fetchUser(4).then(response => {
@@ -113,12 +114,13 @@ const uploadNewImage=i=>{
           <UseInfoTrainer />
         </VWindowItem>
         <VWindowItem>
+  <UseTrainerCourseInfo/>
+</VWindowItem>
+        <VWindowItem>
           <UseTrainerSalary />
 
 </VWindowItem>
-<VWindowItem>
-  <UseTrainerCourseInfo/>
-</VWindowItem>
+
       </VWindow>
     </VCol>
   </VRow>

@@ -40,7 +40,16 @@ export default [
     icon: { icon: 'tabler-currency-dollar' },
     to: "apps-payments",
   },
-
+  {
+    title: 'المسارات',
+    icon: { icon: 'tabler-currency-dollar' },
+    to: "apps-courses",
+  },
+  {
+    title: 'الاختصاصات',
+    icon: { icon: 'tabler-currency-dollar' },
+    to: "apps-specializetions",
+  },
   // {
   //   title: 'Roles & Permissions',
   //   icon: { icon: 'tabler-settings' },

@@ -9,7 +9,8 @@ const salaryDetails = ref({
   salaryDoller: "",
   dateFirstSession: "",
   costOfSession: "",
-  notes: "",
+  dateFirstSalary:"",
+ 
 })
 
 const salaryArray = ref([
@@ -148,19 +149,30 @@ const saveData = () => {
                 md="6"
               >
                 <AppTextField
+                  v-model="salaryDetails.dateFirstSalary"
+                  label="تاريخ أول راتب"
+                  type="date"
+                />
+              </VCol>
+              
+              <VCol cols="6">
+                <AppTextField
                   v-model="salaryDetails.costOfSession"
                   label="تكلفة الجلسة"
                   type="number"
                 />
               </VCol>
-
-              <VCol cols="12">
-                <AppTextarea
-                  v-model="salaryDetails.notes"
-                  label="ملاحظات"
-                />
-              </VCol>
             </vrow>
+            <VRow>
+              <VCol cols="12" class="text-left">
+                <VBtn
+                  type="submit"
+                  @click=""
+                >
+                  حفظ
+                </VBtn>
+              </VCol>
+            </VRow>
           </vform>
 
 </template>
