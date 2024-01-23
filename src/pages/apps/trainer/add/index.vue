@@ -43,48 +43,6 @@ const uploadNewImage=i=>{
   <VRow v-if="userData">
     <VCol
       cols="12"
-      md="5"
-      lg="4"
-    >
-      <div class="mb-8">
-        <VCard title="الصورة الشخصية">
-          <VCardText>
-            <!-- 👉 Upload Photo -->
-            <VAvatar
-              rounded
-              :size="200"
-              class="me-6"
-              image=""
-            />
-          </VCardText>
-        </VCard>
-        <div class="d-flex flex-wrap gap-2 mt-5">
-          <VBtn
-            color="primary"
-            @click="refInputE3?.click()"
-          >
-            <VIcon
-              icon="tabler-cloud-upload"
-              class="d-sm-none"
-            />
-            <span class="d-none d-sm-block">ضع صورتك الشخصية</span>
-          </VBtn>
-
-          <input
-            ref="refInputE3"
-            type="file"
-            name="file"
-            accept=".jpeg,.png,.jpg,GIF"
-            hidden
-            @input="uploadNewImage"
-          >
-        </div>
-      </div>
-      <UserBioPanel :user-data="userData" />
-    </VCol>
-
-    <VCol
-      cols="12"
       md="7"
       lg="8"
     >
@@ -122,6 +80,50 @@ const uploadNewImage=i=>{
 </VWindowItem>
 
       </VWindow>
+    </VCol>
+
+    <VCol
+      cols="12"
+      md="5"
+      lg="4"
+      class="mt-15"
+    >
+      <div class="mb-8">
+        <VCard title="الصورة الشخصية">
+          <VCardText class="d-flex justify-center">
+            <!-- 👉 Upload Photo -->
+            <VAvatar
+              rounded
+              :size="200"
+              class="me-6 "
+            >
+              <img src="../../../../assets/images/avatars/empty.jpg"  alt="">
+            </VAvatar>
+          </VCardText>
+        </VCard>
+        <div class="d-flex flex-wrap gap-2 mt-5">
+          <VBtn
+            color="primary"
+            @click="refInputE3?.click()"
+          >
+            <VIcon
+              icon="tabler-cloud-upload"
+              class="d-sm-none"
+            />
+            <span class="d-none d-sm-block">ضع صورتك الشخصية</span>
+          </VBtn>
+
+          <input
+            ref="refInputE3"
+            type="file"
+            name="file"
+            accept=".jpeg,.png,.jpg,GIF"
+            hidden
+            @input="uploadNewImage"
+          >
+        </div>
+      </div>
+      <!-- <UserBioPanel :user-data="userData" /> -->
     </VCol>
   </VRow>
 </template>
