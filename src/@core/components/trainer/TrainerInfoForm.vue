@@ -1,62 +1,64 @@
 <script setup>
 import AppSelect from '@/@core/components/app-form-elements/AppSelect.vue'
+import { useTrainerListStore } from "@/views/apps/trainer/TrainerListStore"
+import { emailValidator, regexValidator, requiredValidator } from '@validators'
 import { ref } from 'vue'
 
-const firstName = ref('')
-const middleName = ref('')
-const lastName = ref('')
-const trainerId = ref('sp21')
-const birthDate = ref('')
-const email = ref('')
-const phoneNumber = ref('09')
-const training = ref('')
-const startDate = ref('')
-const salaryStartDate = ref('')
-const salary = ref('')
-const sessionSalary = ref('')
-const sessionTotalHours = ref('')
-const sessionTime = ref('')
-const checkbox = ref(false)
+// import type { VForm } from 'vuetify/components/VForm'
+
+const formData = ref({
+  firstName: 'john',
+  middleName: 'mark',
+  lastName: 'doe',
+  trainerId: 'sp210000',
+  birthDate: '01/01/2000',
+  email: 'example@gmail.com',
+  phoneNumber: '0900000000',
+  notes: '',
+  TrainingBatch: '2',
+  address: 'Homs, Syria',
+  specializationSelected: 'مهندس اتصالات',
+  pathSelected: 'Front End',
+  branchSelected: 'ايميسا',
+})
+
+// const firstName = ref('')
+// const middleName = ref('')
+// const lastName = ref('')
+// const trainerId = ref('sp21')
+// const birthDate = ref('')
+// const email = ref('')
+// const phoneNumber = ref('09')
+// const notes= ref('')
+// const TrainingBatch =ref('')
+// const address = ref('')
+
+
+const refForm = ('')
+
+
+const myStore = useTrainerListStore()
 
 const specializationSelected = ref([])
 const specialization = ref(['مهندس معلوماتية ', 'مهندس اتصالات'])
-const sessionDaysSelected = ref([])
-const sessionDays = ref(['السبت ', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'])
 const pathSelected = ref([])
 const path = ref(['Front End', 'Back End', 'Mopile Application'])
 const branchSelected = ref([])
 const branch = ref(['ايميسا', 'التربية', 'online'])
 
-const idErrorMsg = ref(false)
-const phoneErrorMsg = ref(false)
 
-const onIdChange = e => {
-  const regex = /^sp21\d{4}$/
 
-  if (!e.target.value.match(regex)) {
-    idErrorMsg.value = true
-  } else {
-    idErrorMsg.value = false
-
-    trainerId.value =  e.target.value    
-  }
-}
-
-const onPhoneNumberChange = e => {
-  const regex = /^09\d{8}$/
-
-  if (!e.target.value.match(regex)) {
-    phoneErrorMsg.value = true
-  } else {
-    phoneErrorMsg.value = false
-
-    phoneNumber.value =  e.target.value    
-  }
+const onSubmit = () => {
+  myStore.addTrainer(formData)
+ 
 }
 </script>
 
 <template>
-  <VForm @submit.prevent="() => {}">
+  <VForm
+    ref="refForm"
+    @submit.prevent="() => {}"
+  >
     <VRow>
       <!-- 👉 First Name -->
       <VCol
@@ -64,7 +66,8 @@ const onPhoneNumberChange = e => {
         md="4"
       >
         <AppTextField
-          v-model="firstName"
+          v-model="formData.firstName"
+          :rules="[requiredValidator]"
           label="الاسم الأول "
         />
       </VCol>
@@ -75,7 +78,8 @@ const onPhoneNumberChange = e => {
         md="4"
       >
         <AppTextField
-          v-model="middleName"
+          v-model="formData.middleName"
+          :rules="[requiredValidator]"
           label="اسم الأب"
         />
       </VCol>
@@ -86,7 +90,8 @@ const onPhoneNumberChange = e => {
         md="4"
       >
         <AppTextField
-          v-model="lastName"
+          v-model="formData.lastName"
+          :rules="[requiredValidator]"
           label="الاسم الأخير"
         />
       </VCol>
@@ -97,16 +102,10 @@ const onPhoneNumberChange = e => {
         md="6"
       >
         <AppTextField
-          v-model="trainerId"
+          v-model="formData.trainerId"
+          :rules="[requiredValidator, regexValidator(formData.trainerId, '^sp21\d{4}$', 'Please enter sp21 followed by 4 numbers')] "
           label="معرف المدرب"
-          @change="onIdChange"
         />
-        <p
-          v-if="idErrorMsg"
-          class="mt-2 red--text"
-        >
-          Please enter sp21, followed by four digits
-        </p>
       </VCol>
 
       
@@ -116,7 +115,8 @@ const onPhoneNumberChange = e => {
         md="6"
       >
         <AppDateTimePicker
-          v-model="birthDate"
+          v-model="formData.birthDate"
+          :rules="[requiredValidator]"
           label="تاريخ الميلاد "
         />
       </VCol>
@@ -127,7 +127,9 @@ const onPhoneNumberChange = e => {
         md="6"
       >
         <AppTextField
-          v-model="email"
+          v-model="formData.email"
+          :rules="[requiredValidator, emailValidator]"
+          persistent-placeholder
           label="البريد الالكتروني"
         />
       </VCol>
@@ -138,30 +140,31 @@ const onPhoneNumberChange = e => {
         md="6"
       >
         <AppTextField
-          v-model="phoneNumber"
+          v-model="formData.phoneNumber"
+          :rules="[requiredValidator, regexValidator(formData.phoneNumber, '^09[0-9]{8}$', 'Please enter a syrian phone number')]"
           label="رقم الهاتف"
-          @change="onPhoneNumberChange"
         />
-        <p
-          v-if="phoneErrorMsg"
-          class="mt-2 red--text"
-        >
-          -- --- ---Please enter this pattern 09
-        </p>
       </VCol>
 
-
-      <!-- 👉 Specialization -->
+      <VCol
+        cols="12" 
+        md="12" 
+      >
+        <AppTextField 
+          v-model="formData.address" 
+          :rules="[requiredValidator]"
+          label="العنوان"
+        />
+      </VCol>
       <VCol
         cols="12"
         md="6"
       >
-    
-
         <AppSelect
-          v-model="specializationSelected"
+          v-model="formData.specializationSelected"
           v-col
           :items="specialization"
+          :rules="[requiredValidator]"
           label="الاختصاص"
         />
       </VCol>
@@ -171,9 +174,10 @@ const onPhoneNumberChange = e => {
         md="6"
       >
         <AppSelect
-          v-model="pathSelected"
+          v-model="formData.pathSelected"
           v-col
           :items="path"
+          :rules="[requiredValidator]"
           label="المسار"
         />
       </VCol>
@@ -183,7 +187,8 @@ const onPhoneNumberChange = e => {
         md="6"
       >
         <AppTextField
-          v-model="training"
+          v-model="formData.TrainingBatch"
+          :rules="[requiredValidator, regexValidator(formData.TrainingBatch, '^[0-9]+$', 'Enter an approperiate Training Batch Number')]"
           label="الدفعة التدريبية"
         />
       </VCol>
@@ -193,105 +198,20 @@ const onPhoneNumberChange = e => {
         md="6"
       >
         <AppSelect
-          v-model="branchSelected"
+          v-model="formData.branchSelected"
           v-col
           :items="branch"
+          :rules="[requiredValidator]"
           label="الفرع"
         />
       </VCol>
-
-      <!-- 👉 Start Date -->
       <VCol
-        cols="12"
-        md="4"
+        cols="12" 
+        md="12" 
       >
-        <AppDateTimePicker
-          v-model="startDate"
-          label="تاريخ البداية "
-        />
-      </VCol>
-
-      <!-- 👉 Salary -->
-      <VCol
-        cols="12"
-        md="4"
-      >
-        <AppTextField
-          v-model="salary"
-          type="number"
-          label="الراتب"
-        />
-      </VCol>
-      
-      <!-- 👉 Salary Start Date -->
-      <VCol
-        cols="12"
-        md="4"
-      >
-        <AppDateTimePicker
-          v-model="salaryStartDate"
-          label="تاريخ أول راتب"
-        />
-      </VCol> 
-
-      <VDivider class="my-5" />
-
-      <!-- 👉 session Salary -->
-      <VCol
-        cols="12"
-        md="6"
-      >
-        <AppTextField
-          v-model="sessionSalary"
-          type="number"
-          label="راتب الجلسة"
-        />
-      </VCol>
-
-      <!-- 👉 Session Total Hours -->
-      <VCol
-        cols="12"
-        md="6"
-      >
-        <AppTextField
-          v-model="sessionTotalHours"
-          type="number"
-          label="اجمالي الساعات "
-        />
-      </VCol>
-
-      <!-- 👉 Session Days -->
-      <VCol
-        cols="12"
-        md="6"
-      >
-        <AppSelect
-          v-model="sessionDaysSelected"
-          v-col
-          :items="sessionDays"
-          label="ايام الجلسات"
-          chips
-
-          multiple
-        />
-      </VCol>
-      <!-- 👉 Session Salary -->
-      <VCol
-        cols="12"
-        md="6"
-      >
-        <AppDateTimePicker
-          v-model="sessionTime"
-          label="موعد الجلسة"
-          :config="{ enableTime: true, noCalendar: true, dateFormat: 'H:i' }"
-        />
-      </VCol>
-
-      <!-- 👉 Remember me -->
-      <VCol cols="12">
-        <VCheckbox
-          v-model="checkbox"
-          label="Remember me"
+        <AppTextarea 
+          v-model="formData.notes"
+          label="الملاحظات"
         />
       </VCol>
 
@@ -299,7 +219,13 @@ const onPhoneNumberChange = e => {
         cols="12"
         class="d-flex gap-4"
       >
-        <VBtn type="submit">
+        <VBtn
+          type="submit"
+          @click="() => {
+            refForm?.validate()
+            onSubmit()
+          }"
+        >
           Submit
         </VBtn>
 

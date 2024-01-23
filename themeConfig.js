@@ -2,10 +2,7 @@ import { breakpointsVuetify } from '@vueuse/core'
 import { VIcon } from 'vuetify/components/VIcon'
 
 // ❗ Logo SVG must be imported with ?raw suffix
-<<<<<<< HEAD
-import logo from '@images/svg/Darrebnilogo.svg?raw'
-=======
->>>>>>> efa6351 (23-01-2024)
+// import logo from '@images/svg/Darrebnilogo.svg?raw'
 import { defineThemeConfig } from '@core'
 import { RouteTransitions, Skins } from '@core/enums'
 import logo from '@images/logo2.svg?raw'
