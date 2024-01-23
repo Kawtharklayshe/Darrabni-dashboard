@@ -350,7 +350,7 @@ declare module '@vue/runtime-core' {
     TimelineCard: typeof import('./src/views/demos/components/timeline/TimelineCard.vue')['default']
     TimelineWithIcons: typeof import('./src/views/demos/components/timeline/TimelineWithIcons.vue')['default']
     TrainerCourseInfo: typeof import('./src/@core/components/trainer/TrainerCourseInfo.vue')['default']
-    TrainerInfoForm: typeof import('./src/@core/components/trainer/TrainerInfoForm.vue')['default']
+    TrainerInfoForm: typeof import('./src/components/trainer/TrainerInfoForm.vue')['default']
     TrainerSalary: typeof import('./src/@core/components/trainer/TrainerSalary.vue')['default']
     TwoFactorAuthDialog: typeof import('./src/components/dialogs/TwoFactorAuthDialog.vue')['default']
     UserInfoEditDialog: typeof import('./src/components/dialogs/UserInfoEditDialog.vue')['default']

@@ -1,10 +1,13 @@
 <script setup>
 import UseInfoTrainer from '@/views/apps/trainer/add/UseInfoTrainer.vue'
 import { useUserListStore } from '@/views/apps/user/useUserListStore'
+<<<<<<< HEAD
 import UserBioPanel from '@/views/apps/user/view/UserBioPanel.vue'
 import UseTrainerSalary from '@/views/apps/trainer/add/UseTrainerSalary.vue'
 import UseTrainerCourseInfo from '@/views/apps/trainer/add/UseTrainerCourseInfo.vue'
 
+=======
+>>>>>>> efa6351 (23-01-2024)
 
 const userListStore = useUserListStore()
 const route = useRoute()

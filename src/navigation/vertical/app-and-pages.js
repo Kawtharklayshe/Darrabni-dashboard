@@ -26,11 +26,23 @@ export default [
   //     { title: 'Add', to: 'apps-invoice-add' },
   //   ],
   // },
+<<<<<<< HEAD
 
+=======
+  {
+    title: 'User',
+    icon: { icon: 'tabler-users' },
+    children: [
+      { title: 'List', to: 'apps-user-list' },
+      { title: 'View', to: { name: 'apps-user-view-id', params: { id: 21 } } },
+    ],
+  },
+>>>>>>> efa6351 (23-01-2024)
   {
     title: 'المدربين',
     icon: { icon: 'tabler-users' },
     children: [
+<<<<<<< HEAD
 
       { title: 'اضافة', to: { name: 'apps-trainer-add' } },
     ],
@@ -55,6 +67,20 @@ export default [
     icon: { icon: 'tabler-login' },
     to: "apps-login",
   },
+=======
+      { title: 'إضافة', to: { name: 'apps-trainer-add' } },
+      { title: 'قائمة المدربين', to: { name: 'apps-trainer-list' } },
+    ],
+  },
+  {
+    title: 'الاختصاص',
+    icon: { icon: 'tabler-users' },
+    children: [
+      { title: 'إضافة', to: { name: 'apps-specializetion-add' } },
+    ],
+  },
+
+>>>>>>> efa6351 (23-01-2024)
 
   // {
   //   title: 'Roles & Permissions',
