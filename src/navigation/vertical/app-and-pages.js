@@ -37,15 +37,24 @@ export default [
     title: 'متدربين',
     icon: { icon: 'tabler-users' },
     children: [
-      { title: 'List', to: 'apps-user-list' },
-    { title: 'add', to: 'apps-trainee-add' }
+      { title: 'add', to: 'apps-trainee-add'},
+      { title: 'list', to: 'apps-trainee-list' }
+     
     ]
   },
   {
-    title: 'اضافة المسارات',
+    title: 'إضافة المسارات ',
     icon: { icon: 'tabler-file' },
     children: [
-    { title: 'add', to: 'apps-addCourse-add' }
+      { title: 'add', to: 'apps-addCourse-add'},
+    ]
+  },
+  {
+    title: 'الاختصاصات',
+    icon: { icon: 'tabler-users' },
+    children: [
+     
+      { title: 'add', to: 'apps-addSpecialization-add' },
     ]
   },
   {

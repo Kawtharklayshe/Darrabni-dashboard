@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-
+import {useCourseStore  } from '@/views/apps/course/useCourseStore'
 const isDialogVisible = ref(false)
 const course = ref([])
-
+const CourseStore =useCourseStore()
 
 const addCourses = ref(
   {
-    nameCourse: '',
-    numTrain: '',
-    cost: ''
+    name: '',
+    // numTrain: '',
+    // cost: ''
 
   },
 
@@ -19,17 +19,21 @@ const saveDialog = () => {
   course.value.push({ ...addCourses.value })
 
   addCourses.value = {
-    nameCourse: '',
-    numTrain: '',
-    cost: ''
+    name: '',
+    // numTrain: '',
+    // cost: ''
   }
   isDialogVisible.value = false
+
+  CourseStore.addCourse(addCourses).then(response => {
+    addCourses.value = response.data
+})
 }
 
 </script>
 
 <template>
-  <VDialog v-model="isDialogVisible" max-width="600" class="my-3">
+  <VDialog v-model="isDialogVisible" max-width="600" class="my-3">ّ
     <!-- Dialog Activator -->
     <template #activator="{ props }">
       <VBtn v-bind="props" class="my-3">
@@ -45,14 +49,14 @@ const saveDialog = () => {
         <VRow>
           <VCol cols="12">
 
-            <AppTextField v-model="addCourses.nameCourse" label="اسم المسار" />
+            <AppTextField v-model="addCourses.name" label="اسم المسار" />
           </VCol>
-          <VCol cols="12">
+          <!-- <VCol cols="12">
             <AppTextField v-model="addCourses.cost" label=" تكلفة المسار " />
           </VCol>
           <VCol cols="12">
             <AppTextField v-model="addCourses.numTrain" label=" الدفعة التدريبية" persistent-hint />
-          </VCol>
+          </VCol> -->
         </VRow>
       </VCardText>
 
@@ -84,15 +88,16 @@ const saveDialog = () => {
     <tbody>
       <tr v-for="(item, index) in course" :key="index">
         <td>
-          {{ item.nameCourse }}
+          {{ item.name }}
         </td>
-        <td class="text-center">
+        <!-- <td class="text-center">
           {{ item.numTrain }}
         </td>
         <td class="text-center">
           {{ item.cost }}
-        </td>
+        </td> -->
       </tr>
     </tbody>
   </VTable>
 </template>
+ 

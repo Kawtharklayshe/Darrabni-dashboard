@@ -1,10 +1,7 @@
 <script setup>
-import { useUserListStore } from '@/views/apps/user/useUserListStore'
-import UserTrainee from '@/views/apps/user/view/UserTrainee.vue'
 
-const userListStore = useUserListStore()
-const route = useRoute()
-const userData = ref()
+import UserTrainee from '@/views/apps/trainee/add/UserTrainee.vue'
+
 const userTab = ref(null)
 
 const tabs = [
@@ -15,14 +12,14 @@ const tabs = [
 
 ]
 
-userListStore.fetchUser(4).then(response => {
-  userData.value = response.data
-})
+
 </script>
 
 <template>
   
-  <VRow v-if="userData">
+  <VRow >
+   
+
     <VCol
       cols="12"
       md="12"
@@ -46,13 +43,17 @@ userListStore.fetchUser(4).then(response => {
       </VTabs>
 
       <VWindow
-        v-model="userTab"
-        class="mt-6 disable-tab-transition"
+      
+        class="mt-4 disable-tab-transition"
         :touch="false"
       >
+      <div style="background-color: white;">
         <VWindowItem>
           <UserTrainee />
         </VWindowItem>
+
+     
+        </div>
       </VWindow>
     </VCol>
   </VRow>
