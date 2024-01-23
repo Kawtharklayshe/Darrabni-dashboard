@@ -1,12 +1,6 @@
 <script setup>
 import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
-import { useGenerateImageVariant } from '@core/composable/useGenerateImageVariant'
-import authV2LoginIllustrationBorderedDark from '@images/pages/auth-v2-login-illustration-bordered-dark.png'
-import authV2LoginIllustrationBorderedLight from '@images/pages/auth-v2-login-illustration-bordered-light.png'
-import authV2LoginIllustrationDark from '@images/pages/auth-v2-login-illustration-dark.png'
-import authV2LoginIllustrationLight from '@images/pages/auth-v2-login-illustration-light.png'
-import authV2MaskDark from '@images/pages/misc-mask-dark.png'
-import authV2MaskLight from '@images/pages/misc-mask-light.png'
+import Darrebnilogo from '@images/d.jpg'
 import { VNodeRenderer } from '@layouts/components/VNodeRenderer'
 import { themeConfig } from '@themeConfig'
 import {useLoginStore} from "@/views/apps/login/useLoginStore"
@@ -20,14 +14,13 @@ const form = ref({
   password: '',
   remember: false,
 })
+
 const store = useLoginStore()
 const login = () => {
   console.log(form.value)
   store.login(form.value)
 }
 const isPasswordVisible = ref(false)
-const authThemeImg = useGenerateImageVariant(authV2LoginIllustrationLight, authV2LoginIllustrationDark, authV2LoginIllustrationBorderedLight, authV2LoginIllustrationBorderedDark, true)
-const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
 </script>
 
 <template>
@@ -43,15 +36,11 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
         <div class="d-flex align-center justify-center w-100 h-100">
           <VImg
             max-width="505"
-            :src="authThemeImg"
+            :src="Darrebnilogo"
             class="auth-illustration mt-16 mb-2"
           />
         </div>
 
-        <VImg
-          class="auth-footer-mask"
-          :src="authThemeMask"
-        />
       </div>
     </VCol>
 
@@ -67,15 +56,14 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
       >
         <VCardText>
           <VNodeRenderer
-            :nodes="themeConfig.app.logo"
+          :nodes="themeConfig.app.logo"
             class="mb-6"
           />
           <h5 class="text-h5 mb-1">
-            Welcome to <span class="text-capitalize">{{ themeConfig.app.title }}</span>! 👋🏻
+            مرحباً بك في <span class="text-capitalize">{{ themeConfig.app.title }}</span>! 👋🏻
           </h5>
           <p class="mb-0">
-            Please sign-in to your account and start the adventure
-          </p>
+            يرجى تسجيل الدخول إلى حسابك والبدء في المغامرة          </p>
         </VCardText>
         <VCardText>
           <VForm @submit.prevent="() => {}">
@@ -85,9 +73,10 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
                 <AppTextField
                   v-model="form.email"
                   autofocus
-                  label="Email"
+                  label="البريد الإلكتروني"
                   type="email"
                   :rules="[requiredValidator, emailValidator]"
+
                 />
               </VCol>
 
@@ -95,31 +84,33 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
               <VCol cols="12">
                 <AppTextField
                   v-model="form.password"
-                  label="Password"
+                  label="كلمة المرور"
                   :type="isPasswordVisible ? 'text' : 'password'"
                   :append-inner-icon="isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
                   @click:append-inner="isPasswordVisible = !isPasswordVisible"
                   :rules="[requiredValidator, passwordValidator]"
+
                 />
 
                 <div class="d-flex align-center flex-wrap justify-space-between mt-2 mb-4">
                   <VCheckbox
                     v-model="form.remember"
-                    label="Remember me"
+                    label="تذكرني"
                   />
                   <RouterLink
                     class="text-primary ms-2 mb-1"
                     :to="{ name: 'pages-authentication-forgot-password-v2' }"
                   >
-                    Forgot Password?
+                  نسيت كلمة المرور ؟
                   </RouterLink>
                 </div>
 
-                <VBtn @click="login"
+                <VBtn
                   block
                   type="submit"
+                  @click="login"
                 >
-                  Login
+                تسجيل الدخول
                 </VBtn>
               </VCol>
 
@@ -128,12 +119,12 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
                 cols="12"
                 class="text-center text-base"
               >
-                <span>New on our platform?</span>
+                <span>جديد على منصتنا؟</span>
                 <RouterLink
                   class="text-primary ms-2"
                   :to="{ name: 'pages-authentication-register-v2' }"
                 >
-                  Create an account
+                أنشئ حسابًا 
                 </RouterLink>
               </VCol>
 

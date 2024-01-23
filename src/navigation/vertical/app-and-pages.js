@@ -50,6 +50,11 @@ export default [
     icon: { icon: 'tabler-currency-dollar' },
     to: "apps-specializetions",
   },
+  {
+    title: 'تسجيل الدخول',
+    icon: { icon: 'tabler-login' },
+    to: "apps-login",
+  },
   // {
   //   title: 'Roles & Permissions',
   //   icon: { icon: 'tabler-settings' },
