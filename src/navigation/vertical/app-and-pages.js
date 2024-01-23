@@ -58,6 +58,14 @@ export default [
     ]
   },
   {
+    title: 'اضافة الفرع',
+    icon: { icon: 'tabler-file' },
+    children: [
+     
+      { title: 'add', to: 'apps-branches-add' },
+    ]
+  },
+  {
     title: 'Roles & Permissions',
     icon: { icon: 'tabler-settings' },
     children: [

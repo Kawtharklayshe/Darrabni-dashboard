@@ -1,31 +1,28 @@
 <script setup lang="ts">
-import { useSpecializetionListStore } from '@/views/apps/addSpecialization/useSpecializationListStore'
 import { ref } from 'vue'
-
+import { useBranchesListStore  } from '@/views/apps/branches/useBranchesListStore'
+import { label } from '@/views/demos/components/chip/demoCodeChip'
 const isDialogVisible = ref(false)
-const specialtie = ref([])
+const branches = ref([])
+const branchesStore =useBranchesListStore()
 
-
-const useSpecializationStore = useSpecializetionListStore()
-
-const addSpecialties = ref(
+const addBranches = ref(
   {
-    name:'',
-  }
+    prefix:'',
+    name: '',
+  },
+
 )
-  
 
 const saveDialog = () => {
-  useSpecializationStore.addSpecialization(addSpecialties.value).then(response => {
-    // addSpecialties.value = response.data
-})
-    
+    branches.value.push({ ...addBranches.value })
 
-  specialtie.value.push({ ...addSpecialties.value })
-  addSpecialties.value = {
-    name: '',   
-  }
+
   isDialogVisible.value = false
+
+  branchesStore.addBranche({ ...addBranches.value }).then( response => {
+    addBranches.value = response.data
+})
 }
 
 </script>
@@ -35,22 +32,24 @@ const saveDialog = () => {
     <!-- Dialog Activator -->
     <template #activator="{ props }">
       <VBtn v-bind="props" class="my-3">
-        إضافة اختصاص
+        إضافة فرع
       </VBtn>
     </template>
 
     <!-- Dialog close btn -->
     <DialogCloseBtn @click="isDialogVisible = !isDialogVisible" />
     <!-- Dialog Content -->
-    <VCard title="إضافة اختصاص ">
+    <VCard title="إضافة فرع ">
       <VCardText>
         <VRow>
-          <VCol cols="12">
-
-            <AppTextField v-model="addSpecialties.name" label="اسم الاختصاص" />
-          </VCol>
-        
-          
+          <VCol>
+          <AppTextField v-model="addBranches.prefix" label="prefix" />
+        </VCol>
+        </VRow>
+        <VRow>
+        <VCol>
+          <AppTextField v-model="addBranches.name" label="اسم الفرع" />
+        </VCol>
         </VRow>
       </VCardText>
 
@@ -68,20 +67,18 @@ const saveDialog = () => {
     <thead>
       <tr>
         <th class="text-uppercase">
-          id
+          prefix
         </th>
         <th class="text-uppercase">
-          اسم الاختصاص
+          اسم الفرع
         </th>
-
-      
       </tr>
     </thead>
 
     <tbody>
-      <tr v-for="(item, index) in specialtie" :key="index">
+      <tr v-for="(item, index) in branches" :key="index">
         <td>
-          <!-- {{ item.id }} -->
+          {{ item.prefix }}
         </td>
         <td>
           {{ item.name }}
