@@ -55,7 +55,7 @@ const headerValues = computed(() => {
 
 <template>
   <template v-if="!isLessThanOverlayNavBreakpoint(windowWidth)">
-    <VBtn
+    <!-- <VBtn
       icon
       size="small"
       class="app-customizer-toggler rounded-s-lg rounded-0"
@@ -66,7 +66,7 @@ const headerValues = computed(() => {
         size="22"
         icon="tabler-settings"
       />
-    </VBtn>
+    </VBtn> -->
 
     <VNavigationDrawer
       v-model="isNavDrawerOpen"

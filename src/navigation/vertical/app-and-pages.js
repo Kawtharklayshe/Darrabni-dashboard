@@ -26,21 +26,30 @@ export default [
   //     { title: 'Add', to: 'apps-invoice-add' },
   //   ],
   // },
-  // {
-  //   title: 'User',
-  //   icon: { icon: 'tabler-users' },
-  //   children: [
-  //     { title: 'List', to: 'apps-user-list' },
-  //     { title: 'View', to: { name: 'apps-user-view-id', params: { id: 21 } } },
-  //   ],
-  // },
+  {
+    title: 'User',
+    icon: { icon: 'tabler-users' },
+    children: [
+      { title: 'List', to: 'apps-user-list' },
+      { title: 'View', to: { name: 'apps-user-view-id', params: { id: 21 } } },
+    ],
+  },
   {
     title: 'المدربين',
     icon: { icon: 'tabler-users' },
     children: [
-      { title: 'اضافة', to: { name: 'apps-trainer-add' } },
+      { title: 'إضافة', to: { name: 'apps-trainer-add' } },
+      { title: 'قائمة المدربين', to: { name: 'apps-trainer-list' } },
     ],
   },
+  {
+    title: 'الاختصاص',
+    icon: { icon: 'tabler-users' },
+    children: [
+      { title: 'إضافة', to: { name: 'apps-specializetion-add' } },
+    ],
+  },
+
 
   // {
   //   title: 'Roles & Permissions',

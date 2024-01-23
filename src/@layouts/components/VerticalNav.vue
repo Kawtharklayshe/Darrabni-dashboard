@@ -94,14 +94,14 @@ const handleNavScroll = evt => {
           to="/"
           class="app-logo d-flex align-center gap-x-3 app-title-wrapper"
         >
-          <VNodeRenderer :nodes="config.app.logo" />
+        <img src="../../assets/images/logo3.svg" alt="">
 
           <Transition name="vertical-nav-app-title">
             <h1
               v-show="!hideTitleAndIcon"
               class="app-title font-weight-bold text-capitalize leading-normal text-xl"
             >
-              {{ config.app.title }}
+              دربني   
             </h1>
           </Transition>
         </RouterLink>
