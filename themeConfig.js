@@ -16,7 +16,7 @@ export const { themeConfig, layoutConfig } = defineThemeConfig({
     overlayNavFromBreakpoint: breakpointsVuetify.md + 16,
     enableI18n: true,
     theme: 'system',
-    isRtl: false,
+    isRtl: true,
     skin: Skins.Default,
     routeTransition: RouteTransitions.Fade,
     iconRenderer: VIcon,
