@@ -9,13 +9,22 @@ import authV2MaskDark from '@images/pages/misc-mask-dark.png'
 import authV2MaskLight from '@images/pages/misc-mask-light.png'
 import { VNodeRenderer } from '@layouts/components/VNodeRenderer'
 import { themeConfig } from '@themeConfig'
+import {useLoginStore} from "@/views/apps/login/useLoginStore"
+import {
+  emailValidator,
+  passwordValidator,
+  requiredValidator} from '@validators'
 
 const form = ref({
   email: '',
   password: '',
   remember: false,
 })
-
+const store = useLoginStore()
+const login = () => {
+  console.log(form.value)
+  store.login(form.value)
+}
 const isPasswordVisible = ref(false)
 const authThemeImg = useGenerateImageVariant(authV2LoginIllustrationLight, authV2LoginIllustrationDark, authV2LoginIllustrationBorderedLight, authV2LoginIllustrationBorderedDark, true)
 const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
@@ -78,6 +87,7 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
                   autofocus
                   label="Email"
                   type="email"
+                  :rules="[requiredValidator, emailValidator]"
                 />
               </VCol>
 
@@ -89,6 +99,7 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
                   :type="isPasswordVisible ? 'text' : 'password'"
                   :append-inner-icon="isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
                   @click:append-inner="isPasswordVisible = !isPasswordVisible"
+                  :rules="[requiredValidator, passwordValidator]"
                 />
 
                 <div class="d-flex align-center flex-wrap justify-space-between mt-2 mb-4">
@@ -104,7 +115,7 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
                   </RouterLink>
                 </div>
 
-                <VBtn
+                <VBtn @click="login"
                   block
                   type="submit"
                 >

@@ -35,7 +35,7 @@ const password = ref('admin')
 const rememberMe = ref(false)
 
 const login = () => {
-  axios.post('login', {
+  axios.post('/auth/login', {
     email: email.value,
     password: password.value,
   }).then(r => {

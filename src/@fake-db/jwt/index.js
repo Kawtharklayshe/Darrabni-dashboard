@@ -26,7 +26,7 @@ const userTokens = [
 const database = [
   {
     id: 1,
-    fullName: 'John Doe',
+    specializetion: 'frontend',
     username: 'johndoe',
     password: 'admin',
     avatar: avatar1,
@@ -131,17 +131,17 @@ mock.onPost('/auth/register').reply(request => {
     // Calculate user id
     const userData = {
       id: genId(database),
-      email,
-      password,
-      username,
-      fullName: '',
-      role: 'admin',
-      abilities: [
-        {
-          action: 'manage',
-          subject: 'all',
-        },
-      ],
+      // email,
+      // password,
+      // username,
+      specializetion: '',
+      // role: 'admin',
+      // abilities: [
+      //   {
+      //     action: 'manage',
+      //     subject: 'all',
+      //   },
+      // ],
     }
 
     database.push(userData)

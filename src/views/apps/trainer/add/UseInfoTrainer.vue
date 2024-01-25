@@ -6,6 +6,7 @@ import TrainerInfoForm from '@core/components/trainer/TrainerInfoForm.vue'
   <VCard title="ادخال المعلومات الشخصية">
     <VCardText>
       <TrainerInfoForm />
-    </VCardText>
+   
+    </VCardText>  
   </VCard>
 </template>

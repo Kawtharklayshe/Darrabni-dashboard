@@ -51,7 +51,7 @@ export const integerValidator = value => {
 }
 
 // 👉 Regex Validator
-export const regexValidator = (value, regex) => {
+export const regexValidator = (value, regex, msg) => {
   if (isEmpty(value))
     return true
   let regeX = regex
@@ -60,7 +60,7 @@ export const regexValidator = (value, regex) => {
   if (Array.isArray(value))
     return value.every(val => regexValidator(val, regeX))
   
-  return regeX.test(String(value)) || 'The Regex field format is invalid'
+  return regeX.test(String(value)) || msg
 }
 
 // 👉 Alpha Validator
