@@ -15,24 +15,24 @@ const userTab = ref(null)
 const tabs = [
   {
     icon: 'tabler-user-check',
-    title: 'المعلومات الشخصية',
+    title: 'Account',
   },
   {
     icon: 'tabler-lock',
-    title: 'الراتب',
+    title: 'Security',
   },
   {
     icon: 'tabler-currency-dollar',
-    title: 'معلومات المسار',
+    title: 'Billing & Plan',
   },
-  // {
-  //   icon: 'tabler-bell',
-  //   title: 'Notifications',
-  // },
-  // {
-  //   icon: 'tabler-link',
-  //   title: 'Connections',
-  // },
+  {
+    icon: 'tabler-bell',
+    title: 'Notifications',
+  },
+  {
+    icon: 'tabler-link',
+    title: 'Connections',
+  },
 ]
 
 userListStore.fetchUser(Number(route.params.id)).then(response => {
