@@ -4,8 +4,8 @@ import axios from 'axios'
 const axiosIns = axios.create({
 // You can add your headers here
 // ================================
-  baseURL: 'http://127.0.0.1:8000/api/',
-
+  baseURL: 'https://managment.cliprz.org/api/',
+  // window.localStorage.setItem(token,)
   timeout: 1000,
   headers: { 'X-Custom-Header': 'foobar' },
 })

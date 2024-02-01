@@ -6,11 +6,23 @@ import { requiredValidator } from '@validators'
 import { useSpecializationsStore } from "@/views/apps/specializetions/useSpecializationsStore"
 
 const store = useSpecializationsStore()
-const specArray = ref([]);
+const specArray = ref([])
+
 onMounted(() => {
- specArray.value = store.fetchAllSpecializetion()
+  store.fetchAllSpecializetion().then(res=>{
+    console.log(res)
+    specArray.value = res
+  })
+ 
+  
 
 })
+
+const deleteSpecializetion = id => {
+  store.deleteSpecializetion(id)
+  console.log('delete')
+}
+
 // لتجريب الجدول
 // let specArray =[{ name:"dmdjdn", id:11}, { name:"dmdjdn", id:11}]
 
@@ -79,7 +91,7 @@ const sendSpec = () => {
       </VCardText>
     </VCard>
   </VDialog>
-  <VTable class="text-no-wrap" >
+  <VTable class="text-no-wrap">
     <thead>
       <tr>
         <th class="text-uppercase">
@@ -88,13 +100,27 @@ const sendSpec = () => {
         <th class="text-uppercase text-center">
           id
         </th>
+        <th class="text-uppercase">
+          حذف
+        </th>
       </tr>
     </thead>
 
     <tbody v-for="item in specArray">
       <tr>
-        <td>{{item.name}}</td>
-        <td class="text-center">{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td class="text-center">
+          {{ item.id }}
+        </td>
+        <td>
+          <VIcon
+            size="22"
+            icon="tabler-trash"
+            class="mt-1"
+            style="opacity: 1;"
+            @click="deleteSpecializetion(item.id)"
+          />
+        </td>
       </tr>
     </tbody>
   </VTable>

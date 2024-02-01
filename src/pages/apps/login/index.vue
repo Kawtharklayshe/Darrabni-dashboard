@@ -3,11 +3,13 @@ import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
 import Darrebnilogo from '@images/d.jpg'
 import { VNodeRenderer } from '@layouts/components/VNodeRenderer'
 import { themeConfig } from '@themeConfig'
-import {useLoginStore} from "@/views/apps/login/useLoginStore"
+import { useLoginStore } from "@/views/apps/login/useLoginStore"
 import {
   emailValidator,
   passwordValidator,
-  requiredValidator} from '@validators'
+  requiredValidator } from '@validators'
+import axios from '@axios'
+
 
 const form = ref({
   email: '',
@@ -16,10 +18,12 @@ const form = ref({
 })
 
 const store = useLoginStore()
+
 const login = () => {
-  console.log(form.value)
-  store.login(form.value)
+  console.log(form.valu)
+ 
 }
+
 const isPasswordVisible = ref(false)
 </script>
 
@@ -32,15 +36,15 @@ const isPasswordVisible = ref(false)
       md="8"
       class="d-none d-md-flex"
     >
-      <div class="position-relative bg-background rounded-lg w-100 ma-8 me-0">
+      <div class="position-relative  rounded-lg w-100 ma-8 me-0">
         <div class="d-flex align-center justify-center w-100 h-100">
           <VImg
-            max-width="505"
+            max-width="450"
+            max-height="450"
             :src="Darrebnilogo"
             class="auth-illustration mt-16 mb-2"
           />
         </div>
-
       </div>
     </VCol>
 
@@ -52,18 +56,20 @@ const isPasswordVisible = ref(false)
       <VCard
         flat
         :max-width="500"
-        class="mt-12 mt-sm-0 pa-4"
+        class="mt-0 mt-sm-0 pa-4 bg-background"
       >
         <VCardText>
-          <VNodeRenderer
-          :nodes="themeConfig.app.logo"
-            class="mb-6"
-          />
+          <img
+            src="@images/logo3.svg"
+            width="50"
+            alt=""
+          >
           <h5 class="text-h5 mb-1">
             مرحباً بك في <span class="text-capitalize">{{ themeConfig.app.title }}</span>! 👋🏻
           </h5>
           <p class="mb-0">
-            يرجى تسجيل الدخول إلى حسابك والبدء في المغامرة          </p>
+            يرجى تسجيل الدخول إلى حسابك والبدء في المغامرة
+          </p>
         </VCardText>
         <VCardText>
           <VForm @submit.prevent="() => {}">
@@ -76,7 +82,6 @@ const isPasswordVisible = ref(false)
                   label="البريد الإلكتروني"
                   type="email"
                   :rules="[requiredValidator, emailValidator]"
-
                 />
               </VCol>
 
@@ -88,8 +93,6 @@ const isPasswordVisible = ref(false)
                   :type="isPasswordVisible ? 'text' : 'password'"
                   :append-inner-icon="isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
                   @click:append-inner="isPasswordVisible = !isPasswordVisible"
-                  :rules="[requiredValidator, passwordValidator]"
-
                 />
 
                 <div class="d-flex align-center flex-wrap justify-space-between mt-2 mb-4">
@@ -101,7 +104,7 @@ const isPasswordVisible = ref(false)
                     class="text-primary ms-2 mb-1"
                     :to="{ name: 'pages-authentication-forgot-password-v2' }"
                   >
-                  نسيت كلمة المرور ؟
+                    نسيت كلمة المرور ؟
                   </RouterLink>
                 </div>
 
@@ -110,7 +113,7 @@ const isPasswordVisible = ref(false)
                   type="submit"
                   @click="login"
                 >
-                تسجيل الدخول
+                  تسجيل الدخول
                 </VBtn>
               </VCol>
 
@@ -124,7 +127,7 @@ const isPasswordVisible = ref(false)
                   class="text-primary ms-2"
                   :to="{ name: 'pages-authentication-register-v2' }"
                 >
-                أنشئ حسابًا 
+                  أنشئ حسابًا 
                 </RouterLink>
               </VCol>
 
@@ -160,3 +163,20 @@ const isPasswordVisible = ref(false)
 meta:
   layout: blank
 </route>
+ // axios.post('/aute/login', form).then(r => {
+  //   const { token, user } = r.data
+
+  //   localStorage.setItem('userAbilities',   {
+  //     action: 'manage',
+  //     subject: 'all',
+  //   })
+  //   ability.update(userAbilities)
+  //   localStorage.setItem('userName', JSON.stringify(user.name))
+  //   localStorage.setItem(' token', JSON.stringify( token))
+
+  //   // Redirect to `to` query if exist or redirect to index route
+  //   router.replace(route.query.to ? String(route.query.to) : '/')
+  // }).catch(e => {
+   
+  //   console.error(e)
+  // })

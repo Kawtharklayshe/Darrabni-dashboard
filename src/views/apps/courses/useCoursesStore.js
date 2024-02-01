@@ -1,27 +1,26 @@
 import { defineStore } from 'pinia'
-import axios from '@axios'
+import axiosIns from '@/plugins/axios'
 
 export const useCoursesStore = defineStore('useCoursesStore', {
   actions: {
-    // 👉 Fetch trainer data
-    fetchCourse(params) { return axios.get('/apps/trainer/List', { params }) },
+    // 👉
 
-       // 👉 fetch all Specialization
-       fetchAllCourses() {
-        console.log("fetchAllCourses");
-        return new Promise((resolve, reject) => {
-          axios.get(`/course/`).then(response => resolve(response)).catch(error => reject(error))
-        })
-      },
+    // 👉 fetch all Specialization
+    fetchAllCourses() {
+      
+      return new Promise((resolve, reject) => {
+        axiosIns.get(`/course`).then(response =>  {
+          resolve(response.data.data)}).catch(error => reject(error))
+      })
+    },
 
     // 👉 Add Specialization
     addCourse(CourseData) {
       console.log("اسم المسار المضاف:" + CourseData.name)
+      
       return new Promise((resolve, reject) => {
-        axios.post('/course/', {
-          name: CourseData.name,
-          prefix:CourseData.prefix
-        }).then(response => resolve(response))
+        axiosIns.post('/course', CourseData,
+        ).then(response => resolve(response))
           .catch(error => reject(error))
       })
     },
@@ -29,14 +28,14 @@ export const useCoursesStore = defineStore('useCoursesStore', {
     // 👉 fetch single Specialization
     fetchCourse(id) {
       return new Promise((resolve, reject) => {
-        axios.get(`/course/${id}`).then(response => resolve(response)).catch(error => reject(error))
+        axiosIns.get(`/course/${id}`).then(response => resolve(response)).catch(error => reject(error))
       })
     },
 
     // 👉 Delete Specialization
     deleteCourse(id) {
       return new Promise((resolve, reject) => {
-        axios.delete(`/course/${id}`).then(response => resolve(response)).catch(error => reject(error))
+        axiosIns.delete(`/course/${id}`).then(response => resolve(response)).catch(error => reject(error))
       })
     },
   },

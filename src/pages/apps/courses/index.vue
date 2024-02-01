@@ -1,20 +1,29 @@
 
-<script setup lang="ts">
+<script setup>
 import { onMounted, ref } from "vue"
 import { requiredValidator } from '@validators'
 
 import { useCoursesStore } from "@/views/apps/courses/useCoursesStore"
+
 const Name = ref('')
 const prefix = ref('')
 const store = useCoursesStore()
-// const specArray = ref([]);
+
+const specArray = ref([])
 
 onMounted(() => {
-//  specArray.value = store.fetchAllCourses()
+  store.fetchAllCourses().then(res=>{
+    console.log(res)
+    specArray.value = res
+    console.log('vvvvvvvvvvv' + specArray.value)
+  })
+ 
+  
 
 })
+
 // لتجريب الجدول
-let specArray =[{ name:"dmdjdn", prefix:11}, { name:"dmdjdn", prefix:11}]
+// let specArray =[{ name: "dmdjdn", prefix: 11 }, { name: "dmdjdn", prefix: 11 }]
 
 const isDialogVisible = ref(false)
 
@@ -22,6 +31,11 @@ const isDialogVisible = ref(false)
 const sendSpec = () => {
   store.addCourse({ name: Name.value, prefix: prefix.value })
   isDialogVisible.value = false
+}
+
+const deleteCourse = id => {
+  store.deleteCourse(id)
+  console.log('delete')
 }
 </script>
 
@@ -90,7 +104,7 @@ const sendSpec = () => {
       </VCardText>
     </VCard>
   </VDialog>
-  <VTable class="text-no-wrap" >
+  <VTable class="text-no-wrap">
     <thead>
       <tr>
         <th class="text-uppercase">
@@ -99,14 +113,27 @@ const sendSpec = () => {
         <th class="text-uppercase text-center">
           الدفعة التدريبية
         </th>
+        <th class="text-uppercase ">
+          حذف
+        </th>
       </tr>
     </thead>
 
     <tbody v-for="item in specArray">
       <tr>
-        <td>{{item.name}}</td>
-        <td class="text-center"> الدفعة التدريبية
-          {{ item.prefix }} </td>
+        <td>{{ item.name }}</td>
+        <td class="text-center">
+          {{ item.prefix }}
+        </td>
+        <td>
+          <VIcon
+            size="22"
+            icon="tabler-trash"
+            class="mt-1"
+            style="opacity: 1;"
+            @click="deleteCourse(item.id)"
+          />
+        </td>
       </tr>
     </tbody>
   </VTable>

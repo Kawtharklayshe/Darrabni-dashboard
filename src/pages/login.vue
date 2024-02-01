@@ -3,6 +3,9 @@ import { VForm } from 'vuetify/components/VForm'
 import { useAppAbility } from '@/plugins/casl/useAppAbility'
 import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
 import axios from '@axios'
+import Darrebnilogo from '@images/d.jpg'
+import axiosIns from '@/plugins/axios'
+import avatar1 from '@images/avatars/avatar-1.png'
 import { useGenerateImageVariant } from '@core/composable/useGenerateImageVariant'
 import authV2LoginIllustrationBorderedDark from '@images/pages/auth-v2-login-illustration-bordered-dark.png'
 import authV2LoginIllustrationBorderedLight from '@images/pages/auth-v2-login-illustration-bordered-light.png'
@@ -17,6 +20,8 @@ import {
   requiredValidator,
 } from '@validators'
 
+import setAuthHeader from '@/plugins/utils/setAuthHeader.js'
+
 const authThemeImg = useGenerateImageVariant(authV2LoginIllustrationLight, authV2LoginIllustrationDark, authV2LoginIllustrationBorderedLight, authV2LoginIllustrationBorderedDark, true)
 const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
 const isPasswordVisible = ref(false)
@@ -30,37 +35,58 @@ const errors = ref({
 })
 
 const refVForm = ref()
-const email = ref('admin@demo.com')
-const password = ref('admin')
-const rememberMe = ref(false)
+
+
+const form = ref({
+  email: 'uhowe@example.org',
+  password: '123456789',
+  remember: false,
+})
 
 const login = () => {
-  axios.post('/auth/login', {
-    email: email.value,
-    password: password.value,
-  }).then(r => {
-    const { accessToken, userData, userAbilities } = r.data
+  axiosIns.post('/login', form.value)
+    .then(res => {
+      console.log(res.data)
 
-    localStorage.setItem('userAbilities', JSON.stringify(userAbilities))
-    ability.update(userAbilities)
-    localStorage.setItem('userData', JSON.stringify(userData))
-    localStorage.setItem('accessToken', JSON.stringify(accessToken))
+      const { user: { name }, token } = res.data.data
 
-    // Redirect to `to` query if exist or redirect to index route
-    router.replace(route.query.to ? String(route.query.to) : '/')
-  }).catch(e => {
-    const { errors: formErrors } = e.response.data
+      console.log(token, name)
 
-    errors.value = formErrors
-    console.error(e.response.data)
-  })
-}
+      const userAbilities = [
+        {
+          action: 'manage',
+          subject: 'all',
+        },
+      ]
 
-const onSubmit = () => {
-  refVForm.value?.validate().then(({ valid: isValid }) => {
-    if (isValid)
-      login()
-  })
+      const userData = {
+        id: 1,
+        fullName: 'John Doe',
+        username: 'johndoe',
+        avatar: avatar1,
+        email: 'admin@demo.com',
+        role: 'admin',
+      }
+
+      setAuthHeader(token)
+      localStorage.setItem('userAbilities', JSON.stringify(userAbilities))
+      ability.update(userAbilities)
+
+      localStorage.setItem('userData', JSON.stringify(userData))
+      localStorage.setItem('accessToken', JSON.stringify(token))
+      localStorage.setItem('userName', JSON.stringify(name))
+
+      console.log('after store in localStorage')
+
+      // Redirect to to query if exist or redirect to index route
+      router.replace(route.query.to ? String(route.query.to) : '/')
+    }).catch(e => {
+      // const { errors: formErrors } = e.response.data
+
+      // errors.value = formErrors
+      // console.error(e.response.data)
+      console.error(e)
+    })
 }
 </script>
 
@@ -70,125 +96,103 @@ const onSubmit = () => {
     class="auth-wrapper bg-surface"
   >
     <VCol
-      lg="8"
-      class="d-none d-lg-flex"
+      md="8"
+      class="d-none d-md-flex"
     >
-      <div class="position-relative bg-background rounded-lg w-100 ma-8 me-0">
+      <div class="position-relative  rounded-lg w-100 ma-8 me-0">
         <div class="d-flex align-center justify-center w-100 h-100">
           <VImg
-            max-width="505"
-            :src="authThemeImg"
+            max-width="450"
+            max-height="450"
+            :src="Darrebnilogo"
             class="auth-illustration mt-16 mb-2"
           />
         </div>
-
-        <VImg
-          :src="authThemeMask"
-          class="auth-footer-mask"
-        />
       </div>
     </VCol>
-
     <VCol
       cols="12"
-      lg="4"
+      md="4"
       class="auth-card-v2 d-flex align-center justify-center"
     >
       <VCard
         flat
         :max-width="500"
-        class="mt-12 mt-sm-0 pa-4"
+        class="mt-0 mt-sm-0 pa-4 bg-background"
       >
         <VCardText>
-          <VNodeRenderer
-            :nodes="themeConfig.app.logo"
-            class="mb-6"
-          />
-
+          <img
+            src="@images/logo3.svg"
+            width="50"
+            alt=""
+          >
           <h5 class="text-h5 mb-1">
-            Welcome to <span class="text-capitalize"> {{ themeConfig.app.title }} </span>! 👋🏻
+            مرحباً بك في <span class="text-capitalize">{{ themeConfig.app.title }}</span>! 👋🏻
           </h5>
           <p class="mb-0">
-            Please sign-in to your account and start the adventure
+            يرجى تسجيل الدخول إلى حسابك والبدء في المغامرة
           </p>
         </VCardText>
         <VCardText>
-          <VAlert
-            color="primary"
-            variant="tonal"
-          >
-            <p class="text-caption mb-2">
-              Admin Email: <strong>admin@demo.com</strong> / Pass: <strong>admin</strong>
-            </p>
-            <p class="text-caption mb-0">
-              Client Email: <strong>client@demo.com</strong> / Pass: <strong>client</strong>
-            </p>
-          </VAlert>
-        </VCardText>
-        <VCardText>
-          <VForm
-            ref="refVForm"
-            @submit.prevent="onSubmit"
-          >
+          <VForm @submit.prevent="() => { }">
             <VRow>
               <!-- email -->
               <VCol cols="12">
                 <AppTextField
-                  v-model="email"
-                  label="Email"
-                  type="email"
+                  v-model="form.email"
                   autofocus
+                  label="البريد الإلكتروني"
+                  type="email"
                   :rules="[requiredValidator, emailValidator]"
-                  :error-messages="errors.email"
                 />
               </VCol>
 
               <!-- password -->
               <VCol cols="12">
                 <AppTextField
-                  v-model="password"
-                  label="Password"
-                  :rules="[requiredValidator]"
+                  v-model="form.password"
+                  label="كلمة المرور"
                   :type="isPasswordVisible ? 'text' : 'password'"
-                  :error-messages="errors.password"
                   :append-inner-icon="isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
+                  :rules="[requiredValidator]" 
                   @click:append-inner="isPasswordVisible = !isPasswordVisible"
                 />
-
                 <div class="d-flex align-center flex-wrap justify-space-between mt-2 mb-4">
                   <VCheckbox
-                    v-model="rememberMe"
-                    label="Remember me"
+                    v-model="form.remember"
+                    label="تذكرني"
                   />
                   <RouterLink
                     class="text-primary ms-2 mb-1"
-                    :to="{ name: 'forgot-password' }"
+                    :to="{ name: 'pages-authentication-forgot-password-v2' }"
                   >
-                    Forgot Password?
+                    نسيت كلمة المرور ؟
                   </RouterLink>
                 </div>
 
                 <VBtn
                   block
                   type="submit"
+                  @click="login"
                 >
-                  Login
+                  تسجيل الدخول
                 </VBtn>
               </VCol>
 
               <!-- create account -->
               <VCol
                 cols="12"
-                class="text-center"
+                class="text-center text-base"
               >
-                <span>New on our platform?</span>
+                <span>جديد على منصتنا؟</span>
                 <RouterLink
                   class="text-primary ms-2"
-                  :to="{ name: 'register' }"
+                  :to="{ name: 'pages-authentication-register-v2' }"
                 >
-                  Create an account
+                  أنشئ حسابًا
                 </RouterLink>
               </VCol>
+
               <VCol
                 cols="12"
                 class="d-flex align-center"
